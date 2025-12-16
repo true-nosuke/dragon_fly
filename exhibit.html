@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>とんぼ祭 展示情報まとめ</title>
+    <meta name="description" content="とんぼ祭の全展示を検索・フィルター付きで閲覧できます。">
+    <link rel="stylesheet" href="style.css">
+    <meta name="author" content="Nosuke">
+    <meta name="copyright" content="© 2025 Nosuke">
+    <meta name="creator" content="Nosuke">
+    <meta name="license" content="MIT License">
+    <!--favicon-->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<body>
+    <div class="page">
+        <header class="hero">
+            <p class="eyebrow">Tonbo Festival</p>
+            <h1>とんぼ祭 展示情報まとめ</h1>
+            <p class="lede">模擬店・ステージ・イベントの情報を一目でチェック。タイプで絞り込み、キーワード検索で目的の展示をすばやく見つけられます。</p>
+        </header>
+
+        <section class="controls" aria-label="検索と絞り込み">
+            <div class="control-group">
+                <label for="search" class="control-label">キーワード検索</label>
+                <input id="search" type="search" placeholder="例）たこ焼き、ダンス、科学部、体育館" autocomplete="off">
+            </div>
+            <div class="control-group">
+                <label for="type-filter" class="control-label">タイプで絞り込む</label>
+                <select id="type-filter">
+                    <option value="all">すべて</option>
+                    <option value="store">模擬店</option>
+                    <option value="stage">ステージ</option>
+                    <option value="event">イベント</option>
+                    <option value="club_book">部誌・作品集</option>
+                    <option value="big_event">大型企画</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="sort-order" class="control-label">並び替え</label>
+                <select id="sort-order">
+                    <option value="random">ランダム</option>
+                    <option value="nearest">日時に近い順</option>
+                    <option value="name">名前順</option>
+                    <option value="popular">人気順（閲覧数）</option>
+                </select>
+            </div>
+            <div class="control-group count">
+                <p class="control-label">該当件数</p>
+                <p id="result-count" class="count-value">-</p>
+            </div>
+        </section>
+
+        <section id="exhibit-list" class="exhibit-grid" aria-live="polite" aria-busy="false"></section>
+    </div>
+
+    <script src="exhibit.js"></script>
+</body>
+
+</html>

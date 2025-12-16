@@ -1,0 +1,259 @@
+[
+  {
+    "id": "store_1",
+    "menus": [
+      {
+        "name": "たこ焼き（６個）",
+        "price": 100
+      },
+      {
+        "name": "たこ焼き（１２個）",
+        "price": 200
+      }
+    ],
+    "type": "store",
+    "name": "たこ焼き",
+    "club": "陸上競技部",
+    "description": "熱々を提供します。",
+    "location": "中庭",
+    "viewCount": 1250,
+    "raining": {
+      "isRaining": "屋内で決行",
+      "location": "大体育館"
+    },
+    "schedule1": [
+      {
+        "start": "10:00",
+        "end": "15:00"
+      }
+    ],
+    "schedule2": [
+      {
+        "start": "09:00",
+        "end": "15:00"
+      }
+    ]
+  },
+  {
+    "id": "stage_2",
+    "menus": [],
+    "type": "stage",
+    "name": "ダンス",
+    "club": "ダンス部",
+    "description": "ダンスを披露します",
+    "location": "小体育館",
+    "viewCount": 850,
+    "raining": {
+      "isRaining": "そのまま決行"
+    },
+    "schedule1": [
+      {
+        "start": "09:00",
+        "end": "09:30"
+      }
+    ],
+    "schedule2": [
+      {
+        "start": "09:00",
+        "end": "09:30"
+      }
+    ]
+  },
+  {
+    "id": "event_1",
+    "menus": [],
+    "type": "event",
+    "name": "クイズ大会",
+    "club": "とんぼ祭実行委員",
+    "description": "クイズ大会を行います",
+    "location": "中庭",
+    "viewCount": 620,
+    "raining": {
+      "isRaining": "中止"
+    },
+    "schedule1": [
+      {
+        "start": "09:00",
+        "end": "09:30"
+      }
+    ]
+  },
+  {
+    "id": "club_book",
+    "menus": [
+      {
+        "name": "M45",
+        "price": 100
+      }
+    ],
+    "type": "club_book",
+    "name": "地学會",
+    "club": "test",
+    "description": "test",
+    "location": "test",
+    "viewCount": 320,
+    "raining": {
+      "location": "test"
+    }
+  },
+  {
+    "id": "store_2",
+    "menus": [
+      {
+        "name": "からあげ（５個）",
+        "price": 150
+      },
+      {
+        "name": "ポテト",
+        "price": 120
+      }
+    ],
+    "type": "store",
+    "name": "からあげ＆ポテト",
+    "club": "サッカー部",
+    "description": "揚げたてを提供します。",
+    "location": "模擬店通り",
+    "viewCount": 980,
+    "raining": {
+      "isRaining": "屋内で決行",
+      "location": "第一体育館ロビー"
+    },
+    "schedule1": [
+      {
+        "start": "10:00",
+        "end": "16:00"
+      }
+    ],
+    "schedule2": [
+      {
+        "start": "09:00",
+        "end": "16:00"
+      }
+    ]
+  },
+  {
+    "id": "stage_3",
+    "menus": [],
+    "type": "stage",
+    "name": "軽音ライブ",
+    "club": "軽音楽部",
+    "description": "バンド演奏を行います。",
+    "location": "講堂ステージ",
+    "viewCount": 1520,
+    "raining": {
+      "isRaining": "屋内で決行",
+      "location": "講堂"
+    },
+    "schedule1": [
+      {
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "14:00",
+        "end": "15:00"
+      }
+    ],
+    "schedule2": [
+      {
+        "start": "11:00",
+        "end": "12:00"
+      },
+      {
+        "start": "14:00",
+        "end": "15:00"
+      }
+    ]
+  },
+  {
+    "id": "event_2",
+    "menus": [],
+    "type": "event",
+    "name": "脱出ゲーム",
+    "club": "科学部",
+    "description": "教室を使ったミニ脱出ゲームです。",
+    "location": "物理教室",
+    "viewCount": 1100,
+    "raining": {
+      "isRaining": "そのまま決行"
+    },
+    "schedule1": [
+      {
+        "start": "10:30",
+        "end": "12:00"
+      },
+      {
+        "start": "13:00",
+        "end": "15:00"
+      }
+    ]
+  },
+  {
+    "id": "event_3",
+    "menus": [],
+    "type": "event",
+    "name": "ビンゴ大会",
+    "club": "生徒会",
+    "description": "景品付きのビンゴ大会です。",
+    "location": "中庭ステージ前",
+    "viewCount": 760,
+    "raining": {
+      "isRaining": "屋内で実施",
+      "location": "小体育館"
+    },
+    "schedule1": [
+      {
+        "start": "12:30",
+        "end": "13:00"
+      }
+    ]
+  },
+  {
+    "id": "club_book_2",
+    "menus": [
+      {
+        "name": "作品集2024",
+        "price": 300
+      },
+      {
+        "name": "ポストカードセット",
+        "price": 200
+      }
+    ],
+    "type": "club_book",
+    "name": "美術部",
+    "club": "美術部",
+    "description": "部員の作品をまとめました。",
+    "location": "1号館2階 美術室",
+    "viewCount": 450,
+    "raining": {
+      "location": "1号館2階 美術室"
+    }
+  },
+  {
+    "id": "big_event_1",
+    "menus": [],
+    "type": "big_event",
+    "name": "前夜祭セレモニー",
+    "club": "とんぼ祭実行委員",
+    "description": "開幕セレモニーとパフォーマンス。",
+    "location": "メインステージ",
+    "viewCount": 1680,
+    "raining": {
+      "isRaining": "体育館に移動",
+      "location": "大体育館"
+    },
+    "schedule1": [
+      {
+        "start": "17:00",
+        "end": "18:00"
+      }
+    ],
+    "schedule2": [
+      {
+        "start": "17:00",
+        "end": "18:00"
+      }
+    ]
+  }
+]
