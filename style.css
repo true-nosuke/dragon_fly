@@ -1,24 +1,64 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Noto+Sans+JP:wght@400;700&display=swap');
+/*
+	フォント読み込み
+	- Space Grotesk: 英字ヘッダー等のアクセント用（見出しに使用）
+	- Noto Sans JP: 日本語本文用の主要フォント
+*/
 
+/*
+	デザイン変数（カラーパレット・影・角丸など）
+	ここで定義した変数を使って全体のトーンを揃えます。
+	「結ぶ」テーマに合わせて朱（赤）・藍（青）・金の差し色を用意。
+*/
 :root {
 	--bg-1: #fdf6e3;
 	--bg-2: #e1f3ff;
+	--bg: linear-gradient(135deg, var(--bg-1), var(--bg-2));
 	--panel: #ffffff;
 	--text: #0f172a;
 	--muted: #4b5563;
 	--border: #e5e7eb;
-	--accent: #ff7a59;
-	--accent-2: #1f9d8a;
+	/* 「結ぶ」= 水引/紐を意識した朱×藍×金の差し色 */
+	--accent: #d8343a;
+	--accent-2: #1d4ed8;
+	--accent-3: #caa104;
+	--radius: 16px;
+	--shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+	--shadow-strong: 0 18px 42px rgba(15, 23, 42, 0.14);
 	--pill-store: #ffe5d4;
 	--pill-stage: #e6f5ff;
 	--pill-event: #f3e8ff;
 	--pill-club: #e7f6ed;
 	--pill-big: #fff3c4;
-  --flame-1: #ff4500;
-  --flame-2: #ff8c00;
-  --flame-3: #ffd700;
-		linear-gradient(135deg, var(--bg-1), var(--bg-2));
+	--flame-1: var(--accent);
+	--flame-2: var(--accent-3);
+	--flame-3: #fff2b4;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+/*
+  全体の背景と基本フォント設定
+  - 背景は控えめな放射・繰り返しパターンで“つながり”や“交差”を表現します。
+  - フォントは本文用に Noto Sans JP を採用。
+*/
+body {
+	margin: 0;
+	font-family: 'Noto Sans JP', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 	color: var(--text);
+	/* 背景パターンはコメント化してあるため、必要なら戻して下さい */
+	background-attachment: fixed;
+}
+
+a {
+	color: inherit;
 }
 
 .page {
@@ -27,21 +67,62 @@
 	padding: 32px 24px 64px;
 }
 
+/*
+	ページ内コンテンツの幅を制御するラッパー
+	- 中央寄せの最大幅を指定し、内側に余白を確保
+*/
+
 .hero {
-	background: linear-gradient(120deg, rgba(255, 122, 89, 0.12), rgba(31, 157, 138, 0.12));
-	border: 1px solid rgba(255, 122, 89, 0.15);
+	/*
+	  ヒーローセクション（トップのタイトル領域）
+	  - 背景に差し色のにじみを入れて「祭り」「水引」の雰囲気を演出
+	  - ボーダーと角丸で柔らかくまとめる
+	*/
+	position: relative;
+	overflow: hidden;
+	background:
+		linear-gradient(120deg, rgba(216, 52, 58, 0.12), rgba(29, 78, 216, 0.10)),
+		radial-gradient(circle at 18% 40%, rgba(202, 161, 4, 0.14), transparent 50%);
+	border: 1px solid rgba(216, 52, 58, 0.18);
 	border-radius: calc(var(--radius) * 1.2);
 	padding: 28px 24px;
 	box-shadow: var(--shadow);
 }
 
+.hero::after {
+	content: '';
+	position: absolute;
+	left: 18px;
+	right: 18px;
+	bottom: 16px;
+	height: 10px;
+	border-radius: 999px;
+	background:
+		linear-gradient(90deg, rgba(216, 52, 58, 0.55), rgba(202, 161, 4, 0.55), rgba(29, 78, 216, 0.55)),
+		radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.10) 0 2px, transparent 3px);
+	background-size: 100% 100%, 14px 10px;
+	background-repeat: no-repeat, repeat-x;
+	opacity: 0.65;
+}
+
+/*
+	ヒーロー下部の装飾ライン
+	- 水引や帯を想起させる細いグラデーションを敷いて、見出し周りに華やかさを追加
+*/
+
 .eyebrow {
+	font-family: 'Space Grotesk', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
 	color: var(--muted);
 	margin: 0 0 8px;
 	font-size: 13px;
 }
+
+/*
+	小さな英字見出し（eyebrow）
+	- 英字フォントを指定し、祭りの看板風なアクセントに
+*/
 
 .hero h1 {
 	margin: 0 0 10px;
@@ -62,6 +143,11 @@
 	margin: 24px 0 8px;
 	align-items: flex-end;
 }
+
+/*
+	検索・フィルタ等のコントロール群
+	- グリッドレイアウトで複数のコントロールを整列
+*/
 
 .control-group {
 	display: flex;
@@ -89,8 +175,38 @@
 .controls input:focus,
 .controls select:focus {
 	outline: none;
-	border-color: var(--accent-2);
-	box-shadow: 0 0 0 3px rgba(31, 157, 138, 0.15);
+	border-color: rgba(29, 78, 216, 0.7);
+	box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.14);
+}
+
+.main-nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin: 18px 0 0;
+}
+
+/*
+	メインナビゲーション
+	- リンクをボタン風に整え、視認性を高める
+*/
+
+.main-nav a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	padding: 10px 14px;
+	border-radius: 999px;
+	border: 1px solid rgba(15, 23, 42, 0.12);
+	background: rgba(255, 255, 255, 0.72);
+	box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+	font-weight: 700;
+}
+
+.main-nav a:hover {
+	border-color: rgba(216, 52, 58, 0.35);
+	box-shadow: 0 0 0 3px rgba(216, 52, 58, 0.10);
 }
 
 .detail-nav {
@@ -110,9 +226,13 @@
 	background: rgba(255, 255, 255, 0.7);
 }
 
+/*
+	戻るボタン（詳細ページ用）
+*/
+
 .back-link:hover {
-	border-color: rgba(31, 157, 138, 0.5);
-	box-shadow: 0 0 0 3px rgba(31, 157, 138, 0.12);
+	border-color: rgba(29, 78, 216, 0.45);
+	box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.12);
 }
 
 .control-group.count {
@@ -139,25 +259,54 @@
 }
 
 .card {
-	background: var(--panel);
-	border: 1px solid var(--border);
-	border-radius: var(--radius);
-	padding: 18px;
-	box-shadow: var(--shadow);
-	transition: transform 0.18s ease, box-shadow 0.18s ease;
-	animation: fade-up 0.4s ease;
+		/*
+			展示カード（個別の表示ブロック）
+			- 上部に細いリボン風のアクセントを入れて「結ぶ」を連想させる
+			- カード自体は角丸と影で浮かせる
+		*/
+		position: relative;
+		overflow: hidden;
+		background: var(--panel);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 18px;
+		box-shadow: var(--shadow);
+		transition: transform 0.18s ease, box-shadow 0.18s ease;
+		animation: fade-up 0.4s ease;
 }
 
-.card:hover {
-	transform: translateY(-3px);
-	box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+.card::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	height: 4px;
+	background: linear-gradient(90deg, rgba(216, 52, 58, 0.9), rgba(202, 161, 4, 0.9), rgba(29, 78, 216, 0.9));
+	opacity: 0.7;
 }
+
+/*
+	カード上部の小さな帯（リボン）
+	- グラデーションで朱・金・藍を横に流し、視覚的な結び目のヒントに
+*/
+
+/*.card:hover {
+	transform: translateY(-3px);
+	box-shadow: var(--shadow-strong);
+}
+*/
 /* 炎エフェクト付き人気展示カード */
 .card.hot-exhibit {
   position: relative;
   border: 2px solid var(--flame-2);
-  box-shadow: 0 0 20px rgba(255, 140, 0, 0.3), 0 12px 30px rgba(15, 23, 42, 0.1);
+  box-shadow: 0 0 20px rgba(255, 140, 0, 0.991), 0 12px 30px rgba(15, 23, 42, 0.1);
 }
+
+/*
+	人気展示の強調スタイル
+	- 周囲に光るグラデーション枠／ぼかしの発光で注目を促す
+*/
 
 .card.hot-exhibit::before {
   content: '';
@@ -175,12 +324,18 @@
   );
   background-size: 300% 300%;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+	mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   animation: flame-border 3s linear infinite;
   pointer-events: none;
   z-index: -1;
 }
+
+/*
+	人気カードのグラデ枠（アニメーション）
+	- mask はブラウザ互換用に指定。色の流れが移動するアニメーションを適用
+*/
 
 .card.hot-exhibit::after {
   content: '';
@@ -197,11 +352,12 @@
   pointer-events: none;
   z-index: -2;
 }
-
+/*
 .card.hot-exhibit:hover {
   transform: translateY(-5px);
   box-shadow: 0 0 25px rgba(255, 140, 0, 0.4), 0 18px 40px rgba(15, 23, 42, 0.15);
 }
+*/
 .card-header {
 	display: flex;
 	justify-content: space-between;
@@ -219,6 +375,11 @@
 	font-weight: 700;
 	color: #0b1f2a;
 }
+
+/*
+	タイプ表示用のピル（模擬店／ステージ等）
+	- 背景色はタイプごとに分ける
+*/
 
 .card[data-type='store'] .pill.type {
 	background: var(--pill-store);
@@ -285,15 +446,20 @@
 	height: 40px;
 	padding: 0 14px;
 	border-radius: 12px;
-	border: 1px solid rgba(31, 157, 138, 0.35);
-	background: linear-gradient(135deg, rgba(31, 157, 138, 0.12), rgba(255, 122, 89, 0.12));
+	border: 1px solid rgba(29, 78, 216, 0.32);
+	background: linear-gradient(135deg, rgba(216, 52, 58, 0.12), rgba(29, 78, 216, 0.10));
 	color: var(--text);
 	font-weight: 700;
 }
 
+/*
+	詳細へ遷移するボタン
+	- テーマカラーのグラデを使い、押せる要素として視認性を高める
+*/
+
 .detail-button:hover {
-	border-color: rgba(31, 157, 138, 0.6);
-	box-shadow: 0 0 0 3px rgba(31, 157, 138, 0.12);
+	border-color: rgba(216, 52, 58, 0.55);
+	box-shadow: 0 0 0 3px rgba(216, 52, 58, 0.10);
 }
 
 .detail-card {
@@ -337,6 +503,11 @@
 	border-top: 1px solid var(--border);
 	padding-top: 10px;
 }
+
+/*
+	メニュー一覧（模擬店の出品メニュー等）
+	- 各項目をリスト化して表示
+*/
 
 .menu-list {
 	list-style: none;
@@ -417,6 +588,11 @@
 	}
 }
 
+/*
+	アニメーション定義
+	- 各 keyframes はカード表示や人気バッジの視覚効果に使用
+*/
+
 @media (max-width: 640px) {
 	.hero {
 		padding: 22px 20px;
@@ -430,3 +606,8 @@
 		padding: 16px;
 	}
 }
+
+/*
+	レスポンシブ（モバイル）設定
+	- ヒーローやコントロール、カードのパディングを調整
+*/

@@ -1,4 +1,25 @@
-﻿(() => {
+﻿// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAoGfr5rHwN85T7Zs-idEmfq8cWc6zvlNw",
+  authDomain: "tombo-fes-push.firebaseapp.com",
+  projectId: "tombo-fes-push",
+  storageBucket: "tombo-fes-push.firebasestorage.app",
+  messagingSenderId: "675550252748",
+  appId: "1:675550252748:web:a44a06c1298156a78a3c69",
+  measurementId: "G-KE0R3RFL73"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+//todo firebaseから、exhibitデータを取得し、それを表示する。
+
+
+(() => {
   const exhibitListEl = document.getElementById('exhibit-list');
   const searchInput = document.getElementById('search');
   const typeFilter = document.getElementById('type-filter');
@@ -167,7 +188,7 @@
       card.innerHTML = `
         <div class="card-header">
           <span class="pill type">${typeLabel}</span>
-          ${isHot ? '<span class="pill hot-badge">たくさんの人が見ています</span>' : ''}
+          
           <p class="club">${item.club ?? 'クラブ情報なし'}</p>
         </div>
         <h2 class="title"><a class="detail-link" href="${detailHref}">${item.name ?? '名称未設定'}</a></h2>
@@ -181,7 +202,9 @@
           ${schedulesHtml}
         </div>
         ${menusHtml}
+        ${isHot ? '<span class="pill hot-badge">人気</span>' : ''}
         <div class="card-actions">
+        
           <a class="detail-button" href="${detailHref}">詳細を見る</a>
         </div>
       `;
@@ -224,13 +247,20 @@
     if (!exhibitListEl) return;
     setBusy(true);
     try {
-      const res = await fetch('data.json');
-      if (!res.ok) throw new Error(`データの取得に失敗しました: ${res.status}`);
-      const data = await res.json();
+      // Firestore から展示データを取得
+      const db = getFirestore(app);
+      const colRef = collection(db, 'stores');
+      const snap = await getDocs(colRef);
+      const data = snap.docs.map(d => {
+        const doc = d.data() || {};
+        // Firestore のドキュメント id を `id` にセット
+        return Object.assign({ id: d.id }, doc);
+      });
+
       exhibits = Array.isArray(data) ? data : [];
       applyFilters();
     } catch (error) {
-      console.error(error);
+      console.error('Firestore fetch error', error);
       exhibitListEl.innerHTML = '<p class="error">データを読み込めませんでした。時間をおいて再度お試しください。</p>';
       if (resultCountEl) resultCountEl.textContent = '-';
     } finally {
