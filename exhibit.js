@@ -1,7 +1,4 @@
-﻿// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+﻿// Firebase (compat) を前提とする（exhibit.html に CDN スクリプトを追加してください）
 
 const firebaseConfig = {
   apiKey: "AIzaSyAoGfr5rHwN85T7Zs-idEmfq8cWc6zvlNw",
@@ -13,9 +10,10 @@ const firebaseConfig = {
   measurementId: "G-KE0R3RFL73"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// Initialize Firebase (compat)
+var app = firebase.initializeApp(firebaseConfig);
+// Analytics は任意で有効化できます
+// if (firebase.analytics) firebase.analytics();
 //todo firebaseから、exhibitデータを取得し、それを表示する。
 
 
@@ -247,14 +245,13 @@ const analytics = getAnalytics(app);
     if (!exhibitListEl) return;
     setBusy(true);
     try {
-      // Firestore から展示データを取得
-      const db = getFirestore(app);
-      const colRef = collection(db, 'stores');
-      const snap = await getDocs(colRef);
-      const data = snap.docs.map(d => {
-        const doc = d.data() || {};
-        // Firestore のドキュメント id を `id` にセット
-        return Object.assign({ id: d.id }, doc);
+      // Firestore (compat) から展示データを取得
+      var db = firebase.firestore();
+      var snap = await db.collection('stores').get();
+      var data = snap.docs.map(function(d) {
+        var doc = d.data() || {};
+        doc.id = d.id;
+        return doc;
       });
 
       exhibits = Array.isArray(data) ? data : [];
